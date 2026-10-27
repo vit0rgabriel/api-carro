@@ -43,15 +43,15 @@ const getUserById = async (req, res, next) => {
 
 const searchUsersByName = async (req, res, next) => {
     try {
-        const users = await searchUsersByName(req.params.name)
+        const users = await userService.searchUsersByName(req.params.name)
 
         res.status(200).json({
-            message: "Usuários encontrados com sucesso",
+            message: "Usuarios encontrados com sucesso",
             total: users.length,
             data: users
         })
     } catch (error) {
-
+        next(error)
     }
 }
 
@@ -63,6 +63,7 @@ const deleteUser = async (req, res, next) => {
             message: "Usuário deletado com sucesso",
             data: user
         })
+
     } catch (error) {
         next(error)
     }
@@ -70,7 +71,7 @@ const deleteUser = async (req, res, next) => {
 
 const getUserByEmail = async (req, res, next) => {
     try {
-        const user = await userService.getUserByEmail(req.params.email)
+        const user  = await userService.getUserByEmail(req.params.email)
 
         res.status(200).json({
             message: "Usuário encontrado com sucesso",
@@ -82,7 +83,7 @@ const getUserByEmail = async (req, res, next) => {
 }
 
 const updateUser = async (req, res, next) => {
-    try {
+    try { 
         const user = await userService.updateUser(req.params.id, req.body)
 
         res.status(200).json({
@@ -96,14 +97,15 @@ const updateUser = async (req, res, next) => {
 
 const countUsers = async (req, res, next) => {
     try {
-   const total = await userService.countUsers()
+        const total = await userService.countUsers()
 
-    res.status(200).json({
-            message: "Quantidade de usuários encontrados com sucesso",
-            data: user
+        res.status(200).json({
+            message: "Quantidade de usuarios encontrada com sucesso",
+            total
         })
+
     } catch (error) {
-        next (error)
+        next(error)
     }
 }
 

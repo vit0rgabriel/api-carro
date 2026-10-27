@@ -20,7 +20,7 @@ router.get(
 
 
 router.get(
-    "/search/:nome",
+    "/search/:name",
     userController.searchUsersByName
 )
 
@@ -40,7 +40,7 @@ router.put(
 )
 
 router.get(
-    "/count",
+    "/count/users",
     userController.countUsers
 )
 
