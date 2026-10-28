@@ -5,6 +5,9 @@ import connectDB from "./config/db.js";
 
 import userRoutes from "./routes/userRoutes.js"
 
+import carRoutes from "./routes/carRoutes.js"
+
+
 dotenv.config()
 
 const app = express();
@@ -13,6 +16,8 @@ const PORT = 4200
 app.use(express.json());
 
 app.use("/users", userRoutes)
+
+app.use("/cars", carRoutes)
 
 const startServer = async () => {
     try {
