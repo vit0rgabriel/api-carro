@@ -96,9 +96,9 @@ const availableCars = async () => {
 
 const getCarsByPriceRange = async (min, max) => {
     const car = await Car.find({
-        preco: { 
-            $lt: Number(max), 
-            $gt: Number(min) 
+        preco: {
+            $lt: Number(max),
+            $gt: Number(min)
         }
     })
 
@@ -111,8 +111,50 @@ const getCarsByPriceRange = async (min, max) => {
     return car
 }
 
-const updateCar = async () => {
+const updateCar = async (id, data) => {
+    const { modelo, marca, ano, preco, placa } = data
 
+    const car = await Car.findByIdAndUpdate(id, data, {
+        new: true,
+        runValidators: true
+    })
+
+    if (!car) {
+        const error = new Error("Carro não encontrado")
+        error.statusCode = 404
+        throw error
+    }
+
+    return car
+}
+
+const updateAvailability = async (disponivel, data) => {
+    const { modelo, marca, ano, preco, placa } = data
+
+    const car = await Car.findOneAndUpdate(disponivel, data, {
+        new: true,
+        runValidators: true
+    })
+
+    if (!car) {
+        const error = new Error("Carro não encontrado")
+        error.statusCode = 404
+        throw error
+    }
+
+    return car
+}
+
+const deleteCar = async (id) => {
+    const car = await Car.findByIdAndDelete(id)
+
+       if (!car) {
+        const error = new Error("Carro não encontrado")
+        error.statusCode = 404
+        throw error
+    }
+
+    return car
 }
 
 export default {
@@ -124,5 +166,7 @@ export default {
     countAvailableCars,
     availableCars,
     getCarsByPriceRange,
-updateCar
+    updateCar,
+    updateAvailability,
+    deleteCar
 }

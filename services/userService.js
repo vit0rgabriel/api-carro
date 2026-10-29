@@ -4,7 +4,7 @@ const createUser = async (data) => {
     const { nome, email, telefone, idade } = data
 
     if (!nome || !email) {
-        const error = new Error("Nome e email são obrigatorios")
+        const error = new Error("Nome e email são obrigatórios")
         error.statusCode = 400
         throw error
     }
@@ -12,7 +12,7 @@ const createUser = async (data) => {
     const userExists = await User.findOne({ email })
 
     if (userExists) {
-        const error = new Error("email já utilizado")
+        const error = new Error("Email já utilizado")
         error.statusCode = 400
         throw error
     }

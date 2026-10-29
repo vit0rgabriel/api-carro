@@ -118,6 +118,32 @@ const updateCar = async (req, res, next) => {
     }
 }
 
+const updateAvailability = async (req, res, next) => {
+    try {
+        const car = await carService.updateAvailability(req.params.disponivel, req.body)
+
+        res.status(200).json({
+            message: "Carro atualizado",
+            data: car
+        })
+    } catch (error) {
+        next(error)
+    }
+}
+
+const deleteCar = async (req, res, next) => {
+    try {
+        const car = await carService.deleteCar(req.params.id)
+
+        res.status(200).json({
+            message: "Carro atualizado",
+            data: car
+        })
+    } catch (error) {
+        next(error)
+    }
+}
+
 export default {
     createCar,
     getAllCars,
@@ -127,6 +153,7 @@ export default {
     countAvailableCars,
     availableCars,
     getCarsByPriceRange,
-    updateCar
-
+    updateCar,
+    updateAvailability,
+    deleteCar
 }

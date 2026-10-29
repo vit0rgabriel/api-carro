@@ -46,8 +46,19 @@ router.get(
 )
 
 router.put(
-    ":id",
+    "/:id",
     carController.updateCar
+)
+
+
+router.patch(
+    "/:id/availability",
+    carController.updateAvailability
+)
+
+router.delete(
+    "/:id/delete",
+    carController.deleteCar
 )
 
 export default router;
