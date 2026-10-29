@@ -1,4 +1,4 @@
-import mongoose, { mongo, STATES } from "mongoose";
+import mongoose from "mongoose";
 
 const SaleSchema = new mongoose.Schema(
     {
@@ -24,7 +24,7 @@ const SaleSchema = new mongoose.Schema(
         },
 
         dataVenda: {
-            type: STATES,
+            type: Date,
             default: Date.now,
         },
         

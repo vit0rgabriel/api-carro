@@ -148,7 +148,7 @@ const updateAvailability = async (disponivel, data) => {
 const deleteCar = async (id) => {
     const car = await Car.findByIdAndDelete(id)
 
-       if (!car) {
+    if (!car) {
         const error = new Error("Carro não encontrado")
         error.statusCode = 404
         throw error
