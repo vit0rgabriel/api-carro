@@ -48,16 +48,117 @@ const createSale = async (data) => {
     car.disponivel = false
     await car.save()
 
-    return sale 
-    }
+    return sale
+}
 
 const getAllSales = async () => {
     return Sale.find()
-    .populate("userId", "nome email")
-    .populate("carId")
+        .populate("userId", "nome email")
+        .populate("carId")
+}
+
+const getSaleById = async (id) => {
+    const sale = await Sale.findById(id);
+
+    if (!sale) {
+        const error = new Error("Venda não encontrada")
+        error.statusCode = 404
+        throw error
+    }
+
+    return sale
+}
+
+const countSales = async () => {
+    return Sale.countDocuments()
+}
+
+const getSaleByUserId = async (userId) => {
+    const sale = await Sale.findOne({ userId })
+
+    if (!sale) {
+        const error = new Error("Venda não encontrada")
+        error.statusCode = 404
+        throw error
+    }
+
+    return sale
+}
+
+const getSaleByCarId = async (carId) => {
+    const sale = await Sale.findOne({ carId })
+
+    if (!sale) {
+        const error = new Error("Venda não encontrada")
+        error.statusCode = 404
+        throw error
+    }
+
+    return sale
+}
+
+const getSaleByValue = async (min, max) => {
+    const sale = await Sale.find({
+        valorVenda: { $lt: max, $gt: min }
+    })
+
+    if (!sale) {
+        const error = new Error("Venda não encontrada")
+        error.statusCode = 404
+        throw error
+    }
+
+    return sale
+}
+
+const updateSale = async (id, data) => {
+    const sale = await Sale.findByIdAndUpdate(id, data, {
+        new: true,
+        runValidators: true
+    })
+
+    if (!sale) {
+        const error = new Error("Venda não encontrada")
+        error.statusCode = 404
+        throw error
+    }
+
+    return sale
+}
+
+const updateStatus = async (id, data) => {
+    const sale = await Sale.findByIdAndUpdate(id, data)
+
+    if (!sale) {
+        const error = new Error("Venda não encontrada")
+        error.statusCode = 404
+        throw error
+    }
+
+    return sale
+}
+
+const deleteSale = async (id) => {
+    const sale = await Sale.findByIdAndDelete(id)
+
+    if (!sale) {
+        const error = new Error("Venda não encontrada")
+        error.statusCode = 404
+        throw error
+    }
+
+    return sale
 }
 
 export default {
     createSale,
-    getAllSales
+    getAllSales,
+    getSaleById,
+    countSales,
+    getSaleByUserId,
+    getSaleByCarId,
+    getSaleByValue,
+    updateSale,
+    updateStatus,
+    deleteSale
 }

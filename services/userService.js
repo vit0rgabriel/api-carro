@@ -90,13 +90,13 @@ const updateUser = async (id, data) => {
         runValidators: true
     })
 
-   if (!user) {
+    if (!user) {
         const error = new Error("Usuário não encontrado")
         error.statusCode = 404
         throw error
 
     }
-return user
+    return user
 }
 
 const countUsers = async () => {
