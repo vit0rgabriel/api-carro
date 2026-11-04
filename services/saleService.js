@@ -150,6 +150,25 @@ const deleteSale = async (id) => {
     return sale
 }
 
+const getSalesByDate = async (date) => {
+    let inicio = new Date(date)
+    let fim = new Date(inicio)
+
+    if (date.lenght === 4) {
+        inicio = new Date(`${date}-01-01`)
+        fim = new Date(`${Number(date) + 1}-01-01`)
+    } else {
+        fim.setUTCDate(fim.getUTCDate() + 1)
+    }
+
+    return Sale.find({
+        dataVenda: {
+            $gte: inicio,
+            $lt: fim
+        }
+    })
+}
+
 export default {
     createSale,
     getAllSales,
@@ -160,5 +179,6 @@ export default {
     getSaleByValue,
     updateSale,
     updateStatus,
-    deleteSale
+    deleteSale,
+    getSaleByDate
 }

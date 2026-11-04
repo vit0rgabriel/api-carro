@@ -131,6 +131,20 @@ const deleteSale = async (req, res, next) => {
     }
 }
 
+const getSalesByDate = async (req, res, next) => {
+    try {
+        const sale = await saleService.getSalesByDate(req.params.date)
+
+
+            res.status(200).json({
+                message: "Vendas encontradas com sucesso",
+                data: sale
+            })
+    } catch (error) {
+        next(error)
+    }
+}
+
 export default {
     createSale,
     getAllSales,
@@ -141,5 +155,6 @@ export default {
     getSaleByValue,
     updateSale,
     updateStatus,
-    deleteSale
+    deleteSale,
+    getSalesByDate
 }

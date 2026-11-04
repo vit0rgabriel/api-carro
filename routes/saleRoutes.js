@@ -40,9 +40,10 @@ router.get(
     saleController.getSaleByValue
 )
 
-// router.get(
-//     "/"
-// )
+router.get(
+    "/date/:date",
+    saleController.getSalesByDate
+)
 
 router.put(
     "/:id/update",
