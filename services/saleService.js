@@ -150,7 +150,7 @@ const deleteSale = async (id) => {
     return sale
 }
 
-const getSalesByDate = async (date) => {
+const getSaleByDate = async (date) => {
     let inicio = new Date(date)
     let fim = new Date(inicio)
 

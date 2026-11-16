@@ -17,7 +17,7 @@ const getAllSales = async (req, res, next) => {
     try {
         const vendas = await saleService.getAllSales()
 
-        res.status(201).json({
+        res.status(200).json({
             message: "Vendas encontradas com sucesso",
             data: vendas,
         })
